@@ -1,0 +1,10 @@
+// Zmienne (przed Bootstrap)
+@import 'variables';
+
+// Bootstrap
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+// Własne komponenty
+@import 'components/hero';
+@import 'components/cards';
+@import 'components/sections';

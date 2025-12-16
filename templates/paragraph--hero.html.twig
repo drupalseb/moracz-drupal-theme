@@ -1,0 +1,24 @@
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+  ]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+  <div class="hero-background">
+    {{ content.field_obraz_tla }}
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">{{ content.field_tytul }}</h1>
+      <div class="hero-subtitle">{{ content.field_podtytul }}</div>
+      <div class="hero-button">
+        <a href="{{ content.field_link_przycisku.0['#url'] }}">
+          {{ content.field_tekst_przycisku }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
