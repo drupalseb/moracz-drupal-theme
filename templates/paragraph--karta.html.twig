@@ -1,0 +1,52 @@
+{#
+/**
+ * @file
+ * Szablon dla Paragraph: Karta
+ * Lokalizacja: themes/custom/moracz/templates/paragraph--karta.html.twig
+ */
+#}
+
+{# Pobieranie wartości pól #}
+{% set typ_ikony = paragraph.field_typ_ikony.value %}
+{% set kolor_ikony = paragraph.field_kolor_ikony.value %}
+{% set nazwa_ikony = paragraph.field_nazwa_ikony.value %}
+{% set tytul = paragraph.field_tytul.value %}
+{% set opis = paragraph.field_opis.value %}
+
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'card-icon',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  ]
+%}
+
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      
+      {# Ikona CSS w kolorowym okręgu #}
+      {% if typ_ikony == 'ikona' and nazwa_ikony %}
+        <div class="card-icon__icon card-icon__icon--{{ kolor_ikony }}">
+          <i class="{{ nazwa_ikony }}"></i>
+        </div>
+      {% elseif typ_ikony == 'obraz' and paragraph.field_obraz_ikony.entity %}
+        <div class="card-icon__image">
+          {{ content.field_obraz_ikony }}
+        </div>
+      {% endif %}
+
+      {# Tytuł #}
+      {% if tytul %}
+        <h3 class="card-icon__title">{{ tytul }}</h3>
+      {% endif %}
+
+      {# Opis #}
+      {% if opis %}
+        <p class="card-icon__text">{{ opis }}</p>
+      {% endif %}
+
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

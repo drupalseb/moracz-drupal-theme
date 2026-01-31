@@ -1,0 +1,62 @@
+{#
+/**
+ * @file
+ * Szablon dla Paragraph: Link CTA
+ * Lokalizacja: themes/custom/moracz/templates/paragraph--link-cta.html.twig
+ * 
+ * Pola:
+ * - field_tekst = opis/label nad przyciskiem
+ * - field_odnosnik.title = tekst na przycisku (Treść odnośnika)
+ * - field_odnosnik.url = adres URL
+ */
+#}
+
+{# Pobieranie wartości pól #}
+{% set opis = paragraph.field_tekst.value %}
+{% set styl = paragraph.field_styl_przycisku.value %}
+{% set link_url = paragraph.field_odnosnik.0.url %}
+{% set link_tekst = paragraph.field_odnosnik.0.title %}
+
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'cta-link',
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  ]
+%}
+
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      
+      {# Opis nad przyciskiem (opcjonalny) #}
+      {% if opis %}
+        <p class="cta-link__description">{{ opis }}</p>
+      {% endif %}
+
+      {# Przycisk/Link #}
+      {% if styl == 'link' %}
+        <a href="{{ link_url }}" class="cta-link__link">
+          {{ link_tekst }}
+          <span class="cta-link__arrow">→</span>
+        </a>
+      {% elseif styl == 'button_primary' %}
+        <a href="{{ link_url }}" class="cta-link__button cta-link__button--primary">
+          {{ link_tekst }}
+        </a>
+      {% elseif styl == 'button_outline' %}
+        <a href="{{ link_url }}" class="cta-link__button cta-link__button--outline">
+          {{ link_tekst }}
+        </a>
+      {% else %}
+        {# Fallback #}
+        <a href="{{ link_url }}" class="cta-link__link">
+          {{ link_tekst }}
+          <span class="cta-link__arrow">→</span>
+        </a>
+      {% endif %}
+
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

@@ -1,0 +1,71 @@
+// Layout Paragraphs - naprawienie kolumn
+// Obsluga standardowego layout_twocol z Drupal Core
+.layout--twocol {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+
+  > .layout__region {
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+  }
+
+  > .layout__region--first,
+  > .layout__region--second {
+    @media (min-width: 576px) {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+
+  > .layout__region--top,
+  > .layout__region--bottom {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+// Obsluga Bootstrap Barrio layouts (row/col)
+.paragraph--type--sekcja {
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+
+    > [class*="col-"] {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+}
+
+// Sekcje ogolne
+.paragraph--type--sekcja {
+  padding: 3rem 0;
+
+  &:nth-child(even) {
+    background-color: $moracz-light-gray;
+  }
+}
+
+// Naglowki sekcji
+.section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+
+  h2 {
+    font-family: $headings-font-family;
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: $moracz-navy;
+    margin-bottom: 0.5rem;
+  }
+
+  p, .subtitle {
+    font-size: 1.1rem;
+    color: lighten($moracz-dark, 30%);
+  }
+}

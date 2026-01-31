@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Szablon dla Paragraph: Nagłówek sekcji
+ * Lokalizacja: themes/custom/moracz/templates/paragraph--naglowek-sekcji.html.twig
+ */
+#}
+
+{# Pobieranie wartości pól #}
+{% set poziom = paragraph.field_poziom.value ?? 'h2' %}
+{% set tekst = paragraph.field_tekst.value ?? '' %}
+{% set wyrownanie = paragraph.field_wyrownanie.value ?? 'center' %}
+
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'section-header',
+    'section-header--' ~ wyrownanie,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  ]
+%}
+
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {% if tekst %}
+        <{{ poziom }} class="section-header__title section-header__title--{{ wyrownanie }}">
+          {{ tekst }}
+        </{{ poziom }}>
+      {% endif %}
+    {% endblock %}
+  </div>
+{% endblock paragraph %}

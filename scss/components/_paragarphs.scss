@@ -1,0 +1,235 @@
+// ===========================================
+// Komponenty Paragraphs
+// _paragraphs.scss
+// ===========================================
+
+// -------------------------------------------
+// 1. Nagłówek sekcji (.section-header)
+// -------------------------------------------
+
+.section-header {
+  margin-bottom: 2.5rem;
+
+  &__title {
+    font-family: $headings-font-family;
+    font-weight: 700;
+    color: $moracz-navy;
+    margin-bottom: 0;
+
+    // Wyrównanie
+    &--left { text-align: left; }
+    &--center { text-align: center; }
+    &--right { text-align: right; }
+  }
+
+  // Wyrównanie na poziomie kontenera
+  &--left { text-align: left; }
+  &--center { text-align: center; }
+  &--right { text-align: right; }
+}
+
+
+// -------------------------------------------
+// 2. Karta z ikoną (.card-icon)
+// -------------------------------------------
+
+.card-icon {
+  background: $moracz-white;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  // Ikona CSS w kolorowym okręgu
+  &__icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+
+    i {
+      font-size: 2rem;
+      color: $moracz-white;
+    }
+
+    // Warianty kolorystyczne
+    &--red { background-color: #E63946; }
+    &--black { background-color: #333333; }
+    &--yellow { background-color: $moracz-yellow; }
+    &--system_primary { background-color: $moracz-navy; }
+    &--system_secondary { background-color: $moracz-yellow; }
+    &--green { background-color: #2E7D32; }
+    &--blue { background-color: #2196F3; }
+  }
+
+  // Obrazek jako ikona
+  &__image {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  // Tytuł karty
+  &__title {
+    font-family: $headings-font-family;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: $moracz-navy;
+    margin-bottom: 1rem;
+  }
+
+  // Opis karty - NORMALNY TEKST
+  &__text {
+    font-family: $font-family-sans-serif;
+    font-size: 1rem;
+    color: $moracz-dark;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+}
+
+
+// -------------------------------------------
+// 3. Link CTA (.cta-link)
+// -------------------------------------------
+
+.cta-link {
+  text-align: center;
+  margin-top: 2rem;
+
+  // Opis nad przyciskiem
+  &__description {
+    font-size: 1rem;
+    color: $moracz-dark;
+    margin-bottom: 1rem;
+  }
+
+  // Wariant: link ze strzałką
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    color: $moracz-navy;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: darken($moracz-navy, 15%);
+      text-decoration: none;
+
+      .cta-link__arrow {
+        transform: translateX(5px);
+      }
+    }
+  }
+
+  &__arrow {
+    margin-left: 0.5rem;
+    transition: transform 0.2s ease;
+  }
+
+  // Warianty: przyciski
+  &__button {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+
+    &--primary {
+      background-color: $moracz-navy;
+      color: $moracz-white;
+      border: 2px solid $moracz-navy;
+
+      &:hover {
+        background-color: darken($moracz-navy, 10%);
+        border-color: darken($moracz-navy, 10%);
+        color: $moracz-white;
+        text-decoration: none;
+      }
+    }
+
+    &--outline {
+      background-color: transparent;
+      color: $moracz-navy;
+      border: 2px solid $moracz-navy;
+
+      &:hover {
+        background-color: $moracz-navy;
+        color: $moracz-white;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+
+// -------------------------------------------
+// 4. Layout sekcji - style dla regionów
+// -------------------------------------------
+
+// Sekcja z kartami (3 kolumny)
+.layout--threecol-33-34-33 {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -1rem;
+
+  .layout__region {
+    padding: 1rem;
+
+    &--top,
+    &--bottom {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+
+    &--first,
+    &--second,
+    &--third {
+      flex: 0 0 33.333%;
+      max-width: 33.333%;
+
+      @media (max-width: 991px) {
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+
+      @media (max-width: 575px) {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+// Padding dla sekcji paragraphs
+.paragraph--type--sekcja {
+  padding: 3rem 0;
+
+  // Alternujące tło (opcjonalne)
+  &:nth-child(even) {
+    background-color: $moracz-light-gray;
+  }
+}

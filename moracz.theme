@@ -2,10 +2,41 @@
 
 /**
  * @file
- * Functions to support theming in the SASS Starterkit subtheme.
+ * Functions to support theming in the Moracz theme.
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_preprocess_views_view_field().
+ *
+ * Zastąpienie pełnej nazwy szkoły skróconą w Views.
+ */
+function moracz_preprocess_views_view_field(&$variables) {
+  $field = $variables['field'];
+
+  // Sprawdź czy to pole field_szkola
+  if ($field->field === 'field_szkola') {
+    $row = $variables['row'];
+    $entity = $row->_entity ?? NULL;
+
+    if ($entity instanceof NodeInterface && $entity->hasField('field_szkola')) {
+      $szkola_ref = $entity->get('field_szkola')->entity;
+
+      if ($szkola_ref instanceof NodeInterface && $szkola_ref->hasField('field_nazwa_skrocona')) {
+        $nazwa_skrocona = $szkola_ref->get('field_nazwa_skrocona')->value;
+
+        if (!empty($nazwa_skrocona)) {
+          // Zastąp output skróconą nazwą
+          $variables['output'] = [
+            '#markup' => $nazwa_skrocona,
+          ];
+        }
+      }
+    }
+  }
+}
 
 /**
  * Implements hook_form_system_theme_settings_alter() for settings form.
@@ -14,7 +45,7 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * Example on how to alter theme settings form
  */
-function bootstrap_barrio_subtheme_form_system_theme_settings_alter(&$form, FormStateInterface $form_state) {
+function moracz_form_system_theme_settings_alter(&$form, FormStateInterface $form_state) {
   $form['components']['navbar']['bootstrap_barrio_navbar_top_background']['#options'] = [
     'bg-primary' => t('Primary'),
     'bg-secondary' => t('Secondary'),

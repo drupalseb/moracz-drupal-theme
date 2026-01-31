@@ -1,0 +1,121 @@
+// ===========================================
+// Globalne style typografii
+// _typography.scss
+// ===========================================
+
+// -------------------------------------------
+// Nagłówki - jednolity kolor
+// -------------------------------------------
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight;
+  color: $moracz-navy;
+}
+
+// -------------------------------------------
+// Tekst - jednolity kolor
+// -------------------------------------------
+
+body {
+  font-family: $font-family-sans-serif;
+  color: $moracz-dark;
+}
+
+p, li, td, th, span, div {
+  color: inherit;
+}
+
+// -------------------------------------------
+// Odnośniki - navy + żółte podkreślenie
+// -------------------------------------------
+
+a {
+  color: $moracz-navy;
+  text-decoration: underline;
+  text-decoration-color: $moracz-yellow;
+  text-underline-offset: 3px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: darken($moracz-navy, 10%);
+    text-decoration-color: darken($moracz-yellow, 10%);
+  }
+
+  &:focus {
+    outline: 2px solid $moracz-yellow;
+    outline-offset: 2px;
+  }
+
+  // Linki z obrazkami - bez podkreślenia (ogólna zasada)
+  &:has(img) {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+// Przyciski i elementy nawigacji - bez podkreślenia
+.btn,
+.nav-link,
+.navbar-brand,
+.dropdown-item {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+// -------------------------------------------
+// Sekcje i kontenery
+// -------------------------------------------
+
+.region,
+.block,
+.paragraph {
+  h1, h2, h3, h4, h5, h6 {
+    color: $moracz-navy;
+  }
+
+  p {
+    color: $moracz-dark;
+    line-height: 1.6;
+  }
+}
+
+// -------------------------------------------
+// CKEditor content (treści z edytora)
+// -------------------------------------------
+
+.text-formatted,
+.field--type-text-long,
+.field--type-text-with-summary {
+  h1, h2, h3, h4, h5, h6 {
+    color: $moracz-navy;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: $moracz-dark;
+    margin-bottom: 1rem;
+  }
+
+  a {
+    color: $moracz-navy;
+    text-decoration: underline;
+    text-decoration-color: $moracz-yellow;
+  }
+
+  ul, ol {
+    color: $moracz-dark;
+    
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
